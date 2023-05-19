@@ -43,7 +43,7 @@ from [pracma](https://github.com/cran/pracma):
 
 Not all integral functions of pracma are covered. What is missing are:
 
-- Clenshaw from integral
+- 'Clenshaw' from integral
 - integral2
 - integral3
 
@@ -53,7 +53,7 @@ Functions are called identical to the original version.
 
 ```
 source("brobdingnag.integral.r")
-[...use as always but add .brob to the name of the function call - see above]
+[...use as always but add .brob to the name of the function call and use a function that gives out a Brobdingnag object as input for the integration function]
 ```
 
 e.g.
@@ -65,8 +65,8 @@ a <- 0
 b <- pi
 maxit <- 25
 tol <- 1e-15
-romberg.brob(f, a, b, tol=1e-15)
-as.brob(romberg(f=fx, a, b, tol=1e-15)$value)
+romberg.brob(f, a, b, maxit=maxit, tol=tol)
+as.brob(romberg(f=fx, a, b, maxit=maxit, tol=tol)$value)
 ```
 
 ## R version
@@ -75,6 +75,6 @@ All R scripts should work under R >=v3.
 
 ## Disclaimer
 
-R code was tested but is provided "as is".
+R code was tested but is provided "as is". The example calls can be used to test for accuracy.
 
 
