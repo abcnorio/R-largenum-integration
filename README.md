@@ -17,8 +17,8 @@ see license file included - in short it is GPL >=2 - in accordance to the packag
 
 ## Files
 
-- *brobdingnag.integral.r* = tweaked functions to work with very large numbers
-- *brobdingnag.integral_calls* = example code that shows that the tweaked functions produce the same results as the original functions
+- *brobdingnag.integral.r** = tweaked functions to work with very large numbers
+- **brobdingnag.integral_calls** = example code that shows that the tweaked functions produce the same results as the original functions
 
 ## Functions used
 
@@ -43,7 +43,7 @@ from [pracma](https://github.com/cran/pracma):
 - trapz.brob
 - quadgr.brob
 
-Not all integral functions of pracma are covered. What is missing are:
+Not all integration functions of pracma are covered. What is missing are:
 
 - 'Clenshaw' from integral
 - integral2
