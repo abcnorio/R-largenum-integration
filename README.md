@@ -1,4 +1,4 @@
-﻿# R code to enable integration functions for very large number
+﻿# R code to enable integration functions to work with very large numbers
 
 ## Overview
 
