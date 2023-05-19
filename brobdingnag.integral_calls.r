@@ -43,7 +43,7 @@ a <- 0
 b <- pi
 maxit <- 25
 tol <- 1e-15
-romberg.brob(f, a, b, tol=1e-15)
+romberg.brob(f, a, b, maxit=maxit, tol=1e-15)
 as.brob(romberg(f=fx, a, b, maxit=maxit, tol=1e-15)$value)
 #########################################################################
 
