@@ -49,11 +49,11 @@ Not all integral functions of pracma are covered. What is missing are:
 
 ## Function calls
 
-Functions are called identical to the original version.
+Functions are called identical to the original version. Use as normal but add .brob to the name of the function call and use a function that gives out a Brobdingnag object that acts as input for the integration function.
 
 ```
 source("brobdingnag.integral.r")
-[...use as always but add .brob to the name of the function call and use a function that gives out a Brobdingnag object as input for the integration function]
+[...]
 ```
 
 e.g.
