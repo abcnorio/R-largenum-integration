@@ -20,7 +20,9 @@ see license file included - in short it is GPL >=2 - in accordance to the packag
 - **brobdingnag.integral.r** = tweaked functions to work with very large numbers
 - **brobdingnag.integral_calls** = example code that shows that the tweaked functions produce the same results as the original functions
 
-## Functions used - original names just got a *.brob added:
+## Functions used
+
+Original names just got a *.brob added at the end of the filename.
 
 - list2vec.brob = convert a Brobdingnag list to a Brobdingnag vector
 - scalarprod.brob = replace '%*%' scalarproduct that does not work for Brobdingnag objects
