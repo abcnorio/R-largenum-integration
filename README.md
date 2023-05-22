@@ -11,43 +11,42 @@ The [Brobdingnag](https://github.com/RobinHankin/Brobdingnag) R package provides
 [1] 9.881313e-324  0.000000e+00
 ```
 
-## License
+## Licenses
 
-see license file included - in short it is GPL >=2 - in accordance to the packages used.
+See license file included - in short it is GPL >=2 - in accordance to the packages used and the license associated with them.
 
 ## Files
 
-- **brobdingnag.integral.r** = tweaked functions to work with very large numbers
-- **brobdingnag.integral_calls.r** = example code that shows that the tweaked functions produce the same results as the original functions
+| File | Description |
+| --- | --- |
+| `brobdingnag.integral.r` | tweaked functions to work with very large numbers |
+| `brobdingnag.integral_calls.r` | example code that shows that the tweaked functions produce the same results as the original functions |
 
 ## Functions used
 
-Original names just got a *.brob added at the end of the filename.
+Original names just got a `*.brob` added at the end of the filename.
 
-- list2vec.brob = convert a Brobdingnag list to a Brobdingnag vector
-- scalarprod.brob = replace '%*%' scalarproduct that does not work for Brobdingnag objects
-
-from [Bolstad2](https://github.com/cran/Bolstad2):
-
-- sintegral.brob.parallel
-
-from [pracma](https://github.com/cran/pracma):
-
-- romberg.brob
-- cotes.brob
-- integral.brob ("Kronrod", "Simpson" but not "Clenshaw")
-- quadgk.brob
-- simpadpt.brob
-- quadinf.brob
-- quad.brob
-- trapz.brob
-- quadgr.brob
+| Function | Description |
+| --- | --- |
+| `list2vec.brob` | convert a Brobdingnag list to a Brobdingnag vector |
+| `scalarprod.brob` | replace `%*%` scalarproduct that does not work for Brobdingnag objects |
+| `sintegral.brob.parallel` | from [Bolstad2](https://github.com/cran/Bolstad2) |
+| | from [pracma](https://github.com/cran/pracma) |
+| `romberg.brob` | Romberg |
+| `cotes.brob` | Cotes |
+| `integral.brob` | Kronrod, Simpson but not Clenshaw |
+| `quadgk.brob` | internal function |
+| `simpadpt.brob` | Simpson |
+| `quadinf.brob` | internal function |
+| `quad.brob` | internal function |
+| `trapz.brob` | Trapez |
+| `quadgr.brob` | internal function |
 
 Not all integration functions of pracma are covered. What is missing are:
 
-- 'Clenshaw' from integral
-- integral2
-- integral3
+- Clenshaw from `integral`
+- `integral2`
+- `integral3`
 
 ## Function calls
 
@@ -55,7 +54,6 @@ Functions are called identical to the original version. Use as normal but add .b
 
 ```
 source("brobdingnag.integral.r")
-[...]
 ```
 
 e.g.
@@ -77,6 +75,7 @@ All R scripts should work under R >=v3.
 
 ## Disclaimer
 
-R code was tested but is provided "as is". The example calls can be used to test for accuracy.
+
+The R code was tested carefully, and cross-checked against various publication results and manpages to ensure proper results.  The example calls can be used to test for accuracy. However, it is provided "as is". Use common sense to compare results with expectations. NO WARRANTY of any kind is involved here. There is no guarantee that the software is free of error or consistent with any standards or even meets your requirements. Do not use the software or rely on it to solve problems if incorrect results may lead to hurting or injurying living beings of any kind or if it can lead to loss of property or any other possible damage. If you use the software in such a manner, you are on your own and it is your own risk.
 
 
