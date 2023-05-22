@@ -31,7 +31,7 @@ Original names just got a `*.brob` added at the end of the filename.
 | `list2vec.brob` | convert a Brobdingnag list to a Brobdingnag vector |
 | `scalarprod.brob` | replace `%*%` scalarproduct that does not work for Brobdingnag objects |
 | `sintegral.brob.parallel` | from [Bolstad2](https://github.com/cran/Bolstad2) |
-| | from [pracma](https://github.com/cran/pracma) |
+| | from [pracma](https://github.com/cran/pracma): |
 | `romberg.brob` | Romberg |
 | `cotes.brob` | Cotes |
 | `integral.brob` | Kronrod, Simpson but not Clenshaw |
@@ -69,6 +69,10 @@ romberg.brob(f, a, b, maxit=maxit, tol=tol)
 as.brob(romberg(f=fx, a, b, maxit=maxit, tol=tol)$value)
 ```
 
+## TODO
+
+Cover all integration functions.
+
 ## R version
 
 All R scripts should work under R >=v3.
@@ -76,6 +80,6 @@ All R scripts should work under R >=v3.
 ## Disclaimer
 
 
-The R code was tested carefully, and cross-checked against various publication results and manpages to ensure proper results.  The example calls can be used to test for accuracy. However, it is provided "as is". Use common sense to compare results with expectations. NO WARRANTY of any kind is involved here. There is no guarantee that the software is free of error or consistent with any standards or even meets your requirements. Do not use the software or rely on it to solve problems if incorrect results may lead to hurting or injurying living beings of any kind or if it can lead to loss of property or any other possible damage. If you use the software in such a manner, you are on your own and it is your own risk.
+The R code was tested carefully and cross-checked against various public available results and manpages to ensure proper results.  The example calls can be used to test for accuracy. However, it is provided "as is". Use common sense to compare results with expectations. NO WARRANTY of any kind is involved here. There is no guarantee that the software is free of error or consistent with any standards or even meets your requirements. Do not use the software or rely on it to solve problems if incorrect results may lead to hurting or injurying living beings of any kind or if it can lead to loss of property or any other possible damage. If you use the software in such a manner, you are on your own and it is your own risk.
 
 
