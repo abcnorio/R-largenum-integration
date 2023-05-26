@@ -71,7 +71,7 @@ as.brob(romberg(f=fx, a, b, maxit=maxit, tol=tol)$value)
 
 ## TODO
 
-Cover all integration functions.
+Cover all integration methods and add it as multi-threaded.
 
 ## R version
 
@@ -79,7 +79,6 @@ All R scripts should work under R >=v3.
 
 ## Disclaimer
 
-
-The R code was tested carefully and cross-checked against various public available results and manpages to ensure proper results.  The example calls can be used to test for accuracy. However, it is provided "as is". Use common sense to compare results with expectations. NO WARRANTY of any kind is involved here. There is no guarantee that the software is free of error or consistent with any standards or even meets your requirements. Do not use the software or rely on it to solve problems if incorrect results may lead to hurting or injurying living beings of any kind or if it can lead to loss of property or any other possible damage. If you use the software in such a manner, you are on your own and it is your own risk.
+The R code was tested carefully and cross-checked against various public available results and manpages to ensure proper results.  The example calls can be used to test for accuracy. However, it is provided "as is". Use common sense to compare results with expectations. NO WARRANTY of any kind is involved here. There is no guarantee that the software is free of error or consistent with any standards or even meets your requirements. Do not use the software or rely on it to solve problems if incorrect results may lead to hurting or injurying living beings of any kind or if it can lead to loss of property or any other possible damage to the world. If you use the software in such a manner, you are on your own and it is your own risk.
 
 

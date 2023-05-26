@@ -7,5 +7,5 @@ License: GPL (>= 2)
 Package: Brobdingnag
 License: GPL
 
-changes done to enable very large numbers
+changes done to enable very large numbers (C) by LG
 License: GPL in accordance to packages above
