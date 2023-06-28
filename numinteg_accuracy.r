@@ -83,3 +83,14 @@ ck.accuracy(comp=int.real.v, numinteg=trapez.v,methods=c("real value","pracma:::
 ck.accuracy(comp=int.real.v, numinteg=simpson.l.v, methods=c("real value","simpson log"))
 ck.accuracy(comp=int.real.v, numinteg=trapez.brob.v, methods=c("real value","trapez brob"))
 
+# benchmarking
+library(microbenchmark)
+numinteg.benchm <- microbenchmark(
+          integrate(f, lower, upper)$v,
+          Rmpfr:::integrateR(f.Rmpfr, lower, upper)$value,
+          pracma:::trapz(x=sek, y=f(sek)),
+          exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps)),
+          as.numeric( trapz.brob(x=sek, y=f.sek.brob.c) )
+          )
+numinteg.benchm
+

@@ -163,7 +163,32 @@ Using parallel for multi-threading does not lead to expected results - see for y
 
 ## Benchmarking
 
-For benchmarking, the R package [microbenchmark](https://github.com/joshuaulrich/microbenchmark/) is a good choice and easy to use. See the manpage of how to use it and some example calls here.
+For benchmarking, the R package [microbenchmark](https://github.com/joshuaulrich/microbenchmark/) is a good choice and easy to use. See the manpage of how to use it and some example calls here. As a short example we use the code from the accuracy check above:
+
+```
+> # benchmarking
+> library(microbenchmark)
+> Nsteps <- 1e3
+> numinteg.benchm <- microbenchmark(
++           integrate(f, lower, upper)$v,
++           Rmpfr:::integrateR(f.Rmpfr, lower, upper)$value,
++           pracma:::trapz(x=sek, y=f(sek)),
++           simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
++           exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps)),
++           as.numeric( trapz.brob(x=sek, y=f.sek.brob.c) )
++           )
+> numinteg.benchm
+Unit: microseconds
+                                                                     expr       min        lq        mean    median        uq      max neval  cld
+                                             integrate(f, lower, upper)$v    17.950    26.165    42.94091    46.615    55.640    71.14   100 a   
+                          Rmpfr:::integrateR(f.Rmpfr, lower, upper)$value 25575.446 26318.942 28044.54153 26948.197 28003.902 39713.58   100  b  
+                                      pracma:::trapz(x = sek, y = f(sek))   421.650   436.935   465.50396   445.700   454.520   829.30   100 a   
+       simpsonrule.nlb(f, lower, upper, type = "normal", Nsteps = Nsteps)    62.140    71.510    90.17502    91.560    98.245   269.67   100 a   
+ exp(simpsonrule.nlb(f.log, lower, upper, type = "log", Nsteps = Nsteps))  1403.640  1477.560  1687.81533  1521.095  1572.291 15313.48   100   c 
+                        as.numeric(trapz.brob(x = sek, y = f.sek.brob.c))  7607.822  7882.082  8339.16269  8047.017  8205.902 21620.37   100    d 
+```
+
+Note - different methods are mixed here (e.g. Simpson rule, Trapez, integrateR, integrate) as well as the number of steps surely differs between simpsonrule.nlb, trapz, integrate, and integrateR. Thus, differences are difficult to explain. For serious comparison one should match all parameters so that the difference is indeed caused by using log)() or as.brob()/ brob() and not due to the algorithm itself or just due to the number of steps used to calculate the integral. The same is true if methods themselves are compared. Then number of steps, normal/ log/ brob/ etc. must be held constant to allow for a half-way definite answer.
 
 ## TODO
 
