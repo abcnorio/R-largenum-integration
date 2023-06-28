@@ -43,7 +43,7 @@ The third option is to use the package [Rmpfr](https://rmpfr.r-forge.r-project.o
 | `numinteg_accuracy.r` | check accuracy + worked example |
 | `numinteg_brob.r` | numerical integration methods for brob objects (from Bolstad2: `sintegral`, from pracma: `romberg`, `cotes`, `kronrod`, `quadgk`, `simpadpt`, `quadv`, `quadinf`, `quad`, `trapz`, `quadgr`) |
 | `numinteg_brob_calls.r` | example calls |
-| `numinteg_log.r` | numerical integration methods for log functions (rom cmna: `trapez`, `romberg`) |
+| `numinteg_log.r` | numerical integration methods for log functions (from cmna: `trapez`, `romberg`) |
 | `numinteg_log_calls.r` | example calls |
 | `simpsonrule_nlb.r` | general simpson rule for normal, log, and brob objects |
 | `simpsonrule_nlb_calls.r` | example calls |
@@ -68,20 +68,20 @@ Original names just got a `*.brob` added at the end of the filename.
 | `romberg.brob` | Romberg |
 | `cotes.brob` | Cotes |
 | `integral.brob` | Kronrod, Simpson - but not Clenshaw |
-| `quadgk.brob` | internal function |
+| `quadgk.brob` | adaptive Gauss-Kronrod quadrature |
 | `simpadpt.brob` | Simpson |
-| `quadinf.brob` | internal function |
-| `quad.brob` | internal function |
+| `quadinf.brob` | infinite integrals |
+| `quad.brob` | adaptive Simpson quadrature |
 | `trapz.brob` | Trapez |
-| `quadgr.brob` | internal function |
+| `quadgr.brob` | Gaussian quadrature with Richardson extrapolation |
 |  |  |
 | `numinteg_log.r` | **numerical integration methods for log functions:** |
 |  | taken from [cmna](https://jameshoward.us/books/computational-methods-numerical-analysis-r): |
-| `trap.nl` | trapez |
-| `romberg.nl` | romberg |
+| `trap.nl` | Trapez |
+| `romberg.nl` | Romberg |
 |  |  |
 | `simpsonrule_nlb.r` | **Simpson rule** |
-| `simpsonrule.nlb` | for normal, log functions, and brob objects |
+| `simpsonrule.nlb` | Simpson for normal, log functions, and brob objects |
 
 Note: Not all integration methods of pracma are covered. What is missing are:
 
