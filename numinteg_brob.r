@@ -1,57 +1,28 @@
-require(Brobdingnag)
-require(pracma)
-require(Bolstad2)
-require(parallel)
-
-#########################################################################
-# helper function to convert a brob list to a brob vector
-#
-list2vec.brob <- function(list.brob, check.list=FALSE)
-{
-  if(!is.list(list.brob)) stop("Input is not a list.")
-  if(check.list)
-  {
-    if(any(unlist(lapply(list.brob, function(x) attr(x, "class"))) != "brob"))
-    {
-      stop("There are non-brob elements in the list. Stopping.")
-    }  
-  }
-  vec.brob <- brob(unlist(lapply(list.brob,getX)),unlist(lapply(list.brob,getP)))
-  return(vec.brob)
-}
-#########################################################################
-
-
-#########################################################################
-# helper function to replace '%*%' scalarproduct that does not work for brob objects
-#
-scalarprod.brob <- function(c1,c2)
-{
-  #check required?
-  #if( any(c(attr(c1,"class"),attr(c2, "class")) != "brob") ) stop("Elements not of class 'brob'. Stopping.")
-  return( sum(c1*c2) )
-}
-#########################################################################
-
+# numerical integration methods for brob numbers
 
 #########################################################################
 # Bolstad2:::sintegral
 #
 ###########################################################
-sintegral.brob.parallel <- function(fx, sL, sH, Nsteps=100)
+sintegral.brob.parallel <- function(fx, sL, sH, Nsteps=100, parallel=FALSE)
 {
-  # parallel computing
-  require(parallel)
-  if(length(grep("windows", sessionInfo())) > 0) cores <- 1 else cores <- detectCores()
-  #rewritten from sintegral from Bolstad2 package
-  sek <- seq(sL,sH,length=Nsteps)
-  l.intv <- 2*Nsteps+1
-  intv.x <- approx(sek,sek,n=l.intv)$x
-  h <- diff(intv.x)[1]
-  inity <- mclapply(seq_along(1:l.intv), function(x) fx(intv.x[x]), mc.silent = FALSE, mc.cores = cores)
-  summe <- (h/3)*( sum(list2vec.brob(inity[2 * (1:Nsteps) - 1])) +
-                     sum(4*list2vec.brob(inity[2 * (1:Nsteps)])) +
-                     sum(list2vec.brob(inity[2 * (1:Nsteps) + 1])) )
+  # rewritten from sintegral from Bolstad2 package
+  sek <- seq(sL,sH,length=2*Nsteps+1)
+  sek.l <- length(sek)
+  h <- sek[2] - sek[1]
+  if(parallel == TRUE)
+  {
+    require(parallel)
+    if(length(grep("windows", sessionInfo())) > 0) cores <- 1 else cores <- detectCores()
+    inity <- mclapply(seq_along(1:sek.l), function(x) fx(sek[x]), mc.silent = FALSE, mc.cores = cores)
+  } else
+  {
+   inity <- lapply(seq_along(1:sek.l), function(x) fx(sek[x]))
+  }
+  summe <- (h/3)*( sum( list2vec.brob(inity[2 * (1:Nsteps) - 1]) ) +
+                               sum( 4*list2vec.brob(inity[2 * (1:Nsteps)]) ) +
+                               sum( list2vec.brob(inity[2 * (1:Nsteps) + 1]) )
+                              )
 return(summe)
 }
 #########################################################################
