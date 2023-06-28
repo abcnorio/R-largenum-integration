@@ -53,15 +53,15 @@ Original names just got a `*.brob` added at the end of the filename.
 
 | Function | Description |
 | --- | --- |
-| `numinteg_helper-funcs.r` | --- |
+| `numinteg_helper-funcs.r` | helper functions for brob objects and log calculations |
 | `list2vec.brob` | convert a brob list to a brob vector |
 | `scalarprod.brob` | replace `%*%` scalarproduct that does not work for brob objects |
 | `.llog2sub.short` | `log(x-y)` |
 | `.llog.2add.shor` | `log(x+y)` |
 |  |  |
 | `numinteg_brob.r` | for brob objects |
-| `sintegral.brob.parallel` |taken from [Bolstad2](https://github.com/cran/Bolstad2) |
-|  | from [pracma](https://github.com/cran/pracma): |
+| `sintegral.brob.parallel` | taken from [Bolstad2](https://github.com/cran/Bolstad2) |
+|  | taken from [pracma](https://github.com/cran/pracma): |
 | `romberg.brob` | Romberg |
 | `cotes.brob` | Cotes |
 | `integral.brob` | Kronrod, Simpson - but not Clenshaw |
@@ -72,7 +72,7 @@ Original names just got a `*.brob` added at the end of the filename.
 | `trapz.brob` | Trapez |
 | `quadgr.brob` | internal function |
 |  |  |
-| `numinteg_log.r` | taken from [cmna](https://jameshoward.us/books/computational-methods-numerical-analysis-r) for log functions |
+| `numinteg_log.r` | taken from [cmna](https://jameshoward.us/books/computational-methods-numerical-analysis-r) for log functions: |
 | `trap.nl` | trapez for log |
 | `romberg.nl` | romberg for log |
 |  |  |
