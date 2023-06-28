@@ -117,7 +117,7 @@ The *_calls.r files contain examples for each function.
 
 ## Accurcacy
 
-There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various nethods. Beyond the numerical precision of the machine one should not trust numbers anyway unless accuracy is a dedicated feature of the software and emulates accuracy. The file `numinteg_accuracy.r` contains a worked example.
+There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various nethods. Beyond the numerical precision of the machine one should not trust numbers anyway unless accuracy is a dedicated feature of the software and emulates accuracy. The file `numinteg_accuracy.r` contains a simple worked example.
 
 ```
 # function to integrate algebraically and numerically
@@ -155,7 +155,7 @@ factor comp/num.integ.	= 1.0000000000000000
 Note: 'comparative' value can be a real value or from a different method
 ```
 
-And now you can compare output results to a definite value to measure accuracy within the machine tolerance boundaries. If you don't know whether your function can be solved algebraically, you can try with the online integration solver of wolframalpha.
+And now you can compare output results to a definite value to measure accuracy within the machine tolerance boundaries. Or you can compare two numerical integration methods. If you don't know whether your function can be solved algebraically, you can try with the online integration solver of wolframalpha.
 
 ## Notes
 
