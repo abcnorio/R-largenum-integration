@@ -1,8 +1,8 @@
 2a7ba87ad4f18491f88c86ef6ececa32 .gitignore
 393ae4470899bb4d7c15f95e39cf3488 AUTHORS
 3aba10e588dde952526c74e13d1eb5b4 LICENSE
-76306895bccf1c095f63b3fc86ddebc5 MD5
-12cc3485c22462c30efffe675f2b85f8 README.md
+67b02b325ceb63358a57a9f7008dfb6e MD5
+078e53f768bb23c32be142425156f0c1 README.md
 05137e3074a36f3b78fa6c1860600d0c numinteg_accuracy.r
 97bf6b6fb0d9cd58dca4e4476a4d1fef numinteg_brob.r
 7a03ea6b687624d5dba73623cd3ae5d5 numinteg_brob_calls.r

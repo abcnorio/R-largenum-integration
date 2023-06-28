@@ -289,7 +289,7 @@ As we can see the latter two ie. `f.brob` and `f.brob2` lead to exactly the same
 
 ## Further notes
 
-Using parallel for multi-threading does not lead to expected results - see for yourself. It may be helpful if a function to be integrated numerically is highly complicated and it requires a lot of repitiions. Otherwise, trials showed no advantage of using parallel over normal computing. Rather, the opposite was the case - the initial overhead of parallel required more time than normal. If this is repeated, the same story starts again - so no gain at all at this stage.
+Using parallel for multi-threading does not lead to expected results -- see for yourself. It may be helpful if a function to be integrated numerically is highly complicated and it requires a lot of repetiions. Otherwise, trials showed no advantage of using parallel over normal computing. Rather, the opposite was the case: The initial overhead of parallel computing required more time than the normal time required to compute everything. If this is repeated, the same story starts again. So, there is no gain at all at this stage. Future efforts will show whether this can be changed.
 
 ## TODO
 
