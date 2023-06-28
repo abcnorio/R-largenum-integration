@@ -292,7 +292,7 @@ Unit: microseconds
  ```
 
 **Note:**
-As we can see the latter two ie. `f.brob` and `f.brob2` lead to exactly the same results, use the same calculation procedure but differ greatly in time. The only difference is `as.brob(x)` vs. `brob(x)` whereas the first one is much slower than the second one.
+As we can see the latter two ie. `f.brob` and `f.brob2` lead to exactly the same results, use the same calculation procedure but differ greatly in time. The only difference is `as.brob(x)` vs. `brob(log(x))` whereas the first one is much slower than the second one.
 
 ## TODO
 
