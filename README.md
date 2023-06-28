@@ -115,7 +115,7 @@ as.brob(romberg(f=fx, a, b, maxit=maxit, tol=tol)$value)
 
 The *_calls.r files contain examples for each function.
 
-## Accurcacy
+## Accuracy
 
 There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various nethods. Beyond the numerical precision of the machine one should not trust numbers anyway unless accuracy is a dedicated feature of the software and emulates accuracy. The file `numinteg_accuracy.r` contains a simple worked example.
 
