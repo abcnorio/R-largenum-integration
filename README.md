@@ -189,7 +189,7 @@ Unit: microseconds
 ```
 
 **Note:**
-Different methods are mixed here (e.g. Simpson rule, Trapez, integrateR (Romberg), integrate (adaptive quadrature)) as well as the number of steps `Nsteps` surely differs between `simpsonrule.nlb`, `trapz`, `integrate`, and `integrateR`. Thus, causes of such differences in time are difficult to identify precisely. For serious comparison one should match all parameters ie. standardize so that a difference is indeed caused by using log)() or as.brob()/ brob() and not by the algorithm itself or just by `Nsteps` ie. the number of steps used to calculate the integral. The same is true if methods themselves are compared. As an ideal all should be held constant except for what you want to compare. Beyond that, benchmarking is not everything - accuracy must be considered, too if you choose a method.
+Different methods are mixed here (e.g. Simpson rule, Trapez, integrateR (Romberg), integrate (adaptive quadrature)) as well as the number of steps `Nsteps` surely differs between `simpsonrule.nlb`, `trapz`, `integrate`, and `integrateR`. Thus, causes of such differences in time are difficult to identify precisely. For serious comparison one should match all parameters ie. standardize so that a difference is indeed caused by using log)() or as.brob()/ brob() and not by the algorithm itself or just by `Nsteps` ie. the number of steps used to calculate the integral. The same is true if methods themselves are compared. As an ideal all influences should (must) be held constant except for what you want to compare. Beyond that, benchmarking is not everything -- accuracy must be considered, too if you choose a method.
 
 ## TODO
 
