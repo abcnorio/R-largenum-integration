@@ -54,15 +54,15 @@ Original names just got a `*.brob` added at the end of the filename.
 
 | Function | Description |
 | --- | --- |
-| `numinteg_accuracy.r` | **check accuracy + worked example** |
+| `numinteg_accuracy.r` | **Check accuracy + worked example** |
 | `ck.accuracy` | check accuracy |
-| `numinteg_helper-funcs.r` | **helper functions for brob objects and log calculations** |
+| `numinteg_helper-funcs.r` | **Helper functions for brob objects and log calculations** |
 | `list2vec.brob` | convert a brob list to a brob vector |
 | `scalarprod.brob` | replace `%*%` scalarproduct that does not work for brob objects |
 | `.llog2sub.short` | `log(x-y)` |
 | `.llog.2add.shor` | `log(x+y)` |
 |  |  |
-| `numinteg_brob.r` | **numerical integration methods for brob objects** |
+| `numinteg_brob.r` | **Numerical integration methods for brob objects** |
 | `sintegral.brob.parallel` | taken from [Bolstad2](https://github.com/cran/Bolstad2) |
 |  | taken from [pracma](https://github.com/cran/pracma): |
 | `romberg.brob` | Romberg |
@@ -75,7 +75,7 @@ Original names just got a `*.brob` added at the end of the filename.
 | `trapz.brob` | Trapez |
 | `quadgr.brob` | Gaussian quadrature with Richardson extrapolation |
 |  |  |
-| `numinteg_log.r` | **numerical integration methods for log functions:** |
+| `numinteg_log.r` | **Numerical integration methods for log functions:** |
 |  | taken from [cmna](https://jameshoward.us/books/computational-methods-numerical-analysis-r): |
 | `trap.nl` | Trapez |
 | `romberg.nl` | Romberg |
