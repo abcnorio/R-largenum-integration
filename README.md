@@ -196,19 +196,24 @@ Thus, we can repeat the benchmarking above but we will use only one method `simp
 ```
 > Nsteps <- 1e3
 > # repeat for one method
+> # add an alternative function
+> f.brob2 <- function(x) brob(log(sin(x)))
+>
 > simpsonrule.nlb.n <- simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps)
 > simpsonrule.nlb.l <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
 > simpsonrule.nlb.b <- as.numeric(simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps))
+> simpsonrule.nlb.b2 <- as.numeric(simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps))
+>
 > ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.n, methods=c("real","simpsonrule.nlb - normal"))
 
 Checking Numerical Integration Methods
 --------------------------------------------
-comparative method		= real
-num. int. method		= simpsonrule.nlb - normal
-comparative value		= 2
-num. integ. value		= 1.9999991775331358
+comparative method	= real
+num. int. method	= simpsonrule.nlb - normal
+comparative value	= 2
+num. integ. value	= 1.9999991775331358
 diff comp-num.integ.	= 0.0000008224668642
-comp. > num.integ.		= TRUE
+comp. > num.integ.	= TRUE
 abs(diff) < tol = 1e-08	= FALSE
 factor comp/num.integ.	= 1.0000004112336012
 
@@ -219,12 +224,12 @@ Note: 'comparative' value can be a real value or from a different method
 
 Checking Numerical Integration Methods
 --------------------------------------------
-comparative method		= real
-num. int. method		= simpsonrule.nlb - log
-comparative value		= 2
-num. integ. value		= 2.0000000000000675
+comparative method	= real
+num. int. method	= simpsonrule.nlb - log
+comparative value	= 2
+num. integ. value	= 2.0000000000000675
 diff comp-num.integ.	= -0.0000000000000675
-comp. > num.integ.		= FALSE
+comp. > num.integ.	= FALSE
 abs(diff) < tol = 1e-08	= TRUE
 factor comp/num.integ.	= 0.9999999999999662
 
@@ -235,12 +240,28 @@ Note: 'comparative' value can be a real value or from a different method
 
 Checking Numerical Integration Methods
 --------------------------------------------
-comparative method		= real
-num. int. method		= simpsonrule.nlb - brob
-comparative value		= 2
-num. integ. value		= 2.0000000000000657
+comparative method	= real
+num. int. method	= simpsonrule.nlb - brob
+comparative value	= 2
+num. integ. value	= 2.0000000000000657
 diff comp-num.integ.	= -0.0000000000000657
-comp. > num.integ.		= FALSE
+comp. > num.integ.	= FALSE
+abs(diff) < tol = 1e-08	= TRUE
+factor comp/num.integ.	= 0.9999999999999671
+
+---
+Note: 'comparative' value can be a real value or from a different method
+
+> ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.b2, methods=c("real","simpsonrule.nlb - brob2"))
+
+Checking Numerical Integration Methods
+--------------------------------------------
+comparative method	= real
+num. int. method	= simpsonrule.nlb - brob2
+comparative value	= 2
+num. integ. value	= 2.0000000000000657
+diff comp-num.integ.	= -0.0000000000000657
+comp. > num.integ.	= FALSE
 abs(diff) < tol = 1e-08	= TRUE
 factor comp/num.integ.	= 0.9999999999999671
 
@@ -248,7 +269,7 @@ factor comp/num.integ.	= 0.9999999999999671
 Note: 'comparative' value can be a real value or from a different method
 ```
  
-and then for speed:
+and then we compare the speed:
  
 ```
 > # repeat for one method

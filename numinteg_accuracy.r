@@ -96,6 +96,7 @@ numinteg.benchm <- microbenchmark(
           )
 numinteg.benchm
 
+Nsteps <- 1e3
 # repeat for one method
 # add an alternative function
 f.brob2 <- function(x) brob(log(sin(x)))
