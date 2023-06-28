@@ -157,11 +157,7 @@ Note: 'comparative' value can be a real value or from a different method
 
 And now you can compare output results to a definite value to measure accuracy within the machine tolerance boundaries. Or you can compare two numerical integration methods. If you don't know whether your function can be solved algebraically, you can try with the online integration solver of wolframalpha.
 
-## Notes
-
-Using parallel for multi-threading does not lead to expected results - see for yourself. It may be helpful if a function to be integrated numerically is highly complicated and it requires a lot of repitiions. Otherwise, trials showed no advantage of using parallel over normal computing. Rather, the opposite was the case - the initial overhead of parallel required more time than normal. If this is repeated, the same story starts again - so no gain at all at this stage.
-
-## Benchmarking
+## Benchmarking (and accuracy)
 
 For benchmarking, the R package [microbenchmark](https://github.com/joshuaulrich/microbenchmark/) is a good choice and easy to use. See the manpage of how to use it and some example calls here. As a short example we use the code from the accuracy check above:
 
@@ -272,9 +268,6 @@ Note: 'comparative' value can be a real value or from a different method
 and then we compare the speed:
  
 ```
-> # repeat for one method
-> # add an alternative function
-> f.brob2 <- function(x) brob(log(sin(x)))
 > # just compare within one method but with different input
 > numinteg.benchm2 <- microbenchmark(
 +           simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
@@ -293,6 +286,10 @@ Unit: microseconds
 
 **Note:**
 As we can see the latter two ie. `f.brob` and `f.brob2` lead to exactly the same results, use the same calculation procedure but differ greatly in time. The only difference is `as.brob(x)` vs. `brob(log(x))` whereas the first one is much slower than the second one.
+
+## Further notes
+
+Using parallel for multi-threading does not lead to expected results - see for yourself. It may be helpful if a function to be integrated numerically is highly complicated and it requires a lot of repitiions. Otherwise, trials showed no advantage of using parallel over normal computing. Rather, the opposite was the case - the initial overhead of parallel required more time than normal. If this is repeated, the same story starts again - so no gain at all at this stage.
 
 ## TODO
 
