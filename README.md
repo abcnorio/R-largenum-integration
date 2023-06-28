@@ -39,7 +39,7 @@ The third option is to use the package [Rmpfr](https://rmpfr.r-forge.r-project.o
 ## Files
 
 | File | Description |
-|  |  |
+| --- | --- |
 | `numinteg_brob.r` | numerical integration functions for Brobdingnag (from Bolstad2: `sintegral`, from pracma: `romberg`, `cotes`, `kronrod`, `quadgk`, `simpadpt`, `quadv`, `quadinf`, `quad`, `trapz`, `quadgr`) |
 | `numinteg_brob_calls.r` | example calls |
 | `numinteg_log.r` | numerical integration functions for log functions (rom cmna: `trapez`, `romberg`) |
@@ -52,6 +52,7 @@ The third option is to use the package [Rmpfr](https://rmpfr.r-forge.r-project.o
 Original names just got a `*.brob` added at the end of the filename.
 
 | Function | Description |
+| --- | --- |
 | `numinteg_helper-funcs.r` | --- |
 | `list2vec.brob` | convert a brob list to a brob vector |
 | `scalarprod.brob` | replace `%*%` scalarproduct that does not work for brob objects |
