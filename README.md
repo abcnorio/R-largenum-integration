@@ -39,7 +39,7 @@ The third option is to use the package [Rmpfr](https://rmpfr.r-forge.r-project.o
 ## Files
 
 | File | Description |
-| --- | --- |
+|  |  |
 | `numinteg_brob.r` | numerical integration functions for Brobdingnag (from Bolstad2: `sintegral`, from pracma: `romberg`, `cotes`, `kronrod`, `quadgk`, `simpadpt`, `quadv`, `quadinf`, `quad`, `trapz`, `quadgr`) |
 | `numinteg_brob_calls.r` | example calls |
 | `numinteg_log.r` | numerical integration functions for log functions (rom cmna: `trapez`, `romberg`) |
@@ -57,11 +57,10 @@ Original names just got a `*.brob` added at the end of the filename.
 | `scalarprod.brob` | replace `%*%` scalarproduct that does not work for brob objects |
 | `.llog2sub.short` | `log(x-y)` |
 | `.llog.2add.shor` | `log(x+y)` |
-| --- | --- |
-| `numinteg_brob.r` | --- |
-| --- | from [Bolstad2](https://github.com/cran/Bolstad2) for brob objects w & w/o multithreaded |
-| `sintegral.brob.parallel` | --- |
-| --- | from [pracma](https://github.com/cran/pracma): |
+|  |  |
+| `numinteg_brob.r` | for brob objects |
+| `sintegral.brob.parallel` |taken from [Bolstad2](https://github.com/cran/Bolstad2) |
+|  | from [pracma](https://github.com/cran/pracma): |
 | `romberg.brob` | Romberg |
 | `cotes.brob` | Cotes |
 | `integral.brob` | Kronrod, Simpson - but not Clenshaw |
@@ -71,14 +70,13 @@ Original names just got a `*.brob` added at the end of the filename.
 | `quad.brob` | internal function |
 | `trapz.brob` | Trapez |
 | `quadgr.brob` | internal function |
-| --- | --- |
-| `numinteg_log.r` | --- |
-| --- | from [cmna](https://jameshoward.us/books/computational-methods-numerical-analysis-r) |
+|  |  |
+| `numinteg_log.r` | taken from [cmna](https://jameshoward.us/books/computational-methods-numerical-analysis-r) for log functions |
 | `trap.nl` | trapez for log |
 | `romberg.nl` | romberg for log |
-| --- | --- |
-| `numinteg_brob.r` | --- |
-| `simpsonrule.nlb` | simpson for normal, log, brob numbers |
+|  |  |
+| `simpsonrule_nlb.r` | Simpson rule |
+| `simpsonrule.nlb` | for normal, log functions, and brob objects |
 
 Note: Not all integration functions of pracma are covered. What is missing are:
 
