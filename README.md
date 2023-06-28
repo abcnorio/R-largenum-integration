@@ -1,4 +1,4 @@
-﻿# R code to enable numerical integration functions to work with very large numbers
+﻿# R code to enable numerical integration methods to work with very large numbers
 
 ## Overview
 
@@ -113,7 +113,41 @@ The *_calls.r files contain examples for each function.
 
 ## Accurcacy
 
-There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various nethods. Beyond the numerical precision of the machine one should not trust numbers anyway.
+There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various nethods. Beyond the numerical precision of the machine one should not trust numbers anyway unless accuracy is a dedicated feature of the software and emulates accuracy. The file `numinteg_accuracy.r` contains a worked example.
+
+```
+> function to integrate algebraically and numerically
+> f <- function(x) sin(x)
+> # integral analytically solved
+> # sin(x) dx -> -cos(x) + constant
+> # integration boundaries
+> lower <- 0
+> upper <- pi
+> f.integ <- function(lower,upper) -cos(upper) -(-cos(lower))
+> # real value
+> int.real.v <- f.integ(lower=lower, upper=upper)
+> # numerical integration using method on log scale
+> f.log <- function(x) log(sin(x))
+> simpson.l.v <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
+> # check accuracy
+> ck.accuracy(comp=int.real.v, numinteg=simpson.l.v, methods=c("real value","simpson log"))
+
+Checking Numerical Integration Methods
+--------------------------------------------
+comparative method	= real value
+num. int. method	= simpson log
+comparative value	= 2
+num. integ. value	= 2.0000000000000000
+diff comp-num.integ.	= 0.0000000000000000
+comp. > num.integ.	= FALSE
+abs(diff) < tol = 1e-08	= TRUE
+factor comp/num.integ.	= 1.0000000000000000
+
+---
+Note: 'comparative' value can be a real value or from a different method
+```
+
+And now you can compare output results to a definite value to measure accuracy within the machine tolerance boundaries. If you don't know whether your function can be solved algebraically, you can try with the online integration solver of wolframalpha.
 
 ## Notes
 
