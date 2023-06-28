@@ -40,14 +40,14 @@ The third option is to use the package [Rmpfr](https://rmpfr.r-forge.r-project.o
 
 | File | Description |
 | --- | --- |
-| `numinteg_brob.r` | numerical integration functions for Brobdingnag (from Bolstad2: `sintegral`, from pracma: `romberg`, `cotes`, `kronrod`, `quadgk`, `simpadpt`, `quadv`, `quadinf`, `quad`, `trapz`, `quadgr`) |
+| `numinteg_brob.r` | numerical integration methods for brob objects (from Bolstad2: `sintegral`, from pracma: `romberg`, `cotes`, `kronrod`, `quadgk`, `simpadpt`, `quadv`, `quadinf`, `quad`, `trapz`, `quadgr`) |
 | `numinteg_brob_calls.r` | example calls |
-| `numinteg_log.r` | numerical integration functions for log functions (rom cmna: `trapez`, `romberg`) |
+| `numinteg_log.r` | numerical integration methods for log functions (rom cmna: `trapez`, `romberg`) |
 | `numinteg_log_calls.r` | example calls |
-| `simpsonrule_nlb.r` | general simpson rule for normal, log, and Brobdingnag numbers |
+| `simpsonrule_nlb.r` | general simpson rule for normal, log, and brob objects |
 | `simpsonrule_nlb_calls.r` | example calls |
 
-## Functions used
+## Methods used
 
 Original names just got a `*.brob` added at the end of the filename.
 
@@ -79,7 +79,7 @@ Original names just got a `*.brob` added at the end of the filename.
 | `simpsonrule_nlb.r` | Simpson rule |
 | `simpsonrule.nlb` | for normal, log functions, and brob objects |
 
-Note: Not all integration functions of pracma are covered. What is missing are:
+Note: Not all integration methods of pracma are covered. What is missing are:
 
 - Clenshaw from `integral`
 - `integral2`
@@ -113,7 +113,7 @@ The *_calls.r files contain examples for each function.
 
 ## Accurcacy
 
-There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various functions. Beyond the numerical precision of the machine one should not trust numbers anyway.
+There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various nethods. Beyond the numerical precision of the machine one should not trust numbers anyway.
 
 ## Notes
 
