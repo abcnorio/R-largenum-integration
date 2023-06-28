@@ -120,22 +120,26 @@ The *_calls.r files contain examples for each function.
 There is no special treatment to ensure accuracy embedded beyond what is already in the role models from pracma, cmna, and Bolstad2. If one is interested in that, you have to write your own tolerance error function based on known error functions of numerical integration methods. Another option and more pragmatic is to use functions for which the integration result can be obtained algebraically ie. via an analytical solution beyond any doubt. This can be compared to the output of the various nethods. Beyond the numerical precision of the machine one should not trust numbers anyway unless accuracy is a dedicated feature of the software and emulates accuracy. The file `numinteg_accuracy.r` contains a worked example.
 
 ```
-> function to integrate algebraically and numerically
-> f <- function(x) sin(x)
-> # integral analytically solved
-> # sin(x) dx -> -cos(x) + constant
-> # integration boundaries
-> lower <- 0
-> upper <- pi
-> f.integ <- function(lower,upper) -cos(upper) -(-cos(lower))
-> # real value
-> int.real.v <- f.integ(lower=lower, upper=upper)
-> # numerical integration using method on log scale
-> f.log <- function(x) log(sin(x))
-> simpson.l.v <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
-> # check accuracy
-> ck.accuracy(comp=int.real.v, numinteg=simpson.l.v, methods=c("real value","simpson log"))
+# function to integrate algebraically and numerically
+f <- function(x) sin(x)
+# integral analytically solved
+# sin(x) dx -> -cos(x) + constant
+# integration boundaries
+lower <- 0
+upper <- pi
+f.integ <- function(lower,upper) -cos(upper) -(-cos(lower))
+# real value
+int.real.v <- f.integ(lower=lower, upper=upper)
+# numerical integration using method on log scale
+f.log <- function(x) log(sin(x))
+simpson.l.v <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
+# check accuracy
+ck.accuracy(comp=int.real.v, numinteg=simpson.l.v, methods=c("real value","simpson log"))
+```
 
+This results in:
+
+```
 Checking Numerical Integration Methods
 --------------------------------------------
 comparative method	= real value
