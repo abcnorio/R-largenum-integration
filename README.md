@@ -191,6 +191,88 @@ Unit: microseconds
 **Note:**
 Different methods are mixed here (e.g. Simpson rule, Trapez, Romberg (`integrateR`), adaptive quadrature (`integrate`)). Additionally, the number of steps `Nsteps` differs between `simpsonrule.nlb`, `trapz`, `integrate`, and `integrateR` esp. if a cut-off criterium is chosen based on some tolerance value. Thus, causes of any differences in computer time are difficult to identify precisely. For serious comparison one should standardize all influences so that a difference is indeed caused by either the input method (like `log)()` or `as.brob()`/ `brob()`) and not by the algorithm itself (like Simpsonb, Trapez, Romberg, etc.) or just by the number of steps `Nsteps` used to calculate the integral. This is valid for all other comparisons. As an ideal all influences should (must) be held constant except for what you want to compare. Beyond that, benchmarking is not everything -- accuracy must be considered too if you choose a method. Both together allow for a compromise if you work with very large numbers.
 
+Thus, we can repeat the benchmarking above but we will use only one method `simpsonrule.nlb` but with different input: normal, log, brob. First, we check for accuracy:
+
+```
+> Nsteps <- 1e3
+> # repeat for one method
+> simpsonrule.nlb.n <- simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps)
+> simpsonrule.nlb.l <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
+> simpsonrule.nlb.b <- as.numeric(simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps))
+> ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.n, methods=c("real","simpsonrule.nlb - normal"))
+
+Checking Numerical Integration Methods
+--------------------------------------------
+comparative method		= real
+num. int. method		= simpsonrule.nlb - normal
+comparative value		= 2
+num. integ. value		= 1.9999991775331358
+diff comp-num.integ.	= 0.0000008224668642
+comp. > num.integ.		= TRUE
+abs(diff) < tol = 1e-08	= FALSE
+factor comp/num.integ.	= 1.0000004112336012
+
+---
+Note: 'comparative' value can be a real value or from a different method
+
+> ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.l, methods=c("real","simpsonrule.nlb - log"))
+
+Checking Numerical Integration Methods
+--------------------------------------------
+comparative method		= real
+num. int. method		= simpsonrule.nlb - log
+comparative value		= 2
+num. integ. value		= 2.0000000000000675
+diff comp-num.integ.	= -0.0000000000000675
+comp. > num.integ.		= FALSE
+abs(diff) < tol = 1e-08	= TRUE
+factor comp/num.integ.	= 0.9999999999999662
+
+---
+Note: 'comparative' value can be a real value or from a different method
+
+> ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.b, methods=c("real","simpsonrule.nlb - brob"))
+
+Checking Numerical Integration Methods
+--------------------------------------------
+comparative method		= real
+num. int. method		= simpsonrule.nlb - brob
+comparative value		= 2
+num. integ. value		= 2.0000000000000657
+diff comp-num.integ.	= -0.0000000000000657
+comp. > num.integ.		= FALSE
+abs(diff) < tol = 1e-08	= TRUE
+factor comp/num.integ.	= 0.9999999999999671
+
+---
+Note: 'comparative' value can be a real value or from a different method
+```
+ 
+and then for speed:
+ 
+```
+> # repeat for one method
+> # add an alternative function
+> f.brob2 <- function(x) brob(log(sin(x)))
+> # just compare within one method but with different input
+> numinteg.benchm2 <- microbenchmark(
++           simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
++           simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps),
++           simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps),
++           simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps)
++ )
+> numinteg.benchm2
+Unit: microseconds
+                                                                   expr       min        lq         mean     median         uq       max neval cld
+     simpsonrule.nlb(f, lower, upper, type = "normal", Nsteps = Nsteps)     61.64     66.79     81.06962     78.810     92.600    112.64   100 a  
+    simpsonrule.nlb(f.log, lower, upper, type = "log", Nsteps = Nsteps)   1398.98   1485.38   1693.13454   1525.745   1609.541  12096.86   100 a  
+  simpsonrule.nlb(f.brob, lower, upper, type = "brob", Nsteps = Nsteps) 231282.95 240144.51 252877.14441 251100.391 258555.633 515170.27   100  b 
+ simpsonrule.nlb(f.brob2, lower, upper, type = "brob", Nsteps = Nsteps) 157890.80 167820.18 176322.08066 175793.131 183799.018 211417.95   100   c
+ ```
+
+**Note:**
+As we can see the latter two ie. `f.brob` and `f.brob2` lead to exactly the same results, use the same calculation procedure but differ greatly in time. The only difference is `as.brob(x)` vs. `brob(x)` whereas the first one is much slower than the second one.
+
 ## TODO
 
 Cover all integration methods and add them as multi-threaded nevertheless to find out how to integrate parallel computing better and more efficiently to speed up the process.

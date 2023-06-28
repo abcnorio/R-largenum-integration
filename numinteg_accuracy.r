@@ -15,7 +15,7 @@ ck.accuracy <- function(comp, numinteg, tol=1e-8, digits=16, methods=NA)
   cat("\ncomp. > num.integ.\t= ",comp > numinteg,sep="")
   cat("\nabs(diff) < tol = ",tol,"\t= ",abs(diff) < tol,sep="")
   cat("\nfactor comp/num.integ.\t= ",sprintf(acdigs, comp/numinteg),"\n\n",sep="")
-  cat("---\nNote: 'comparative' value can be a real value or from a different method")
+  cat("---\nNote: 'comparative' value can be a real value or from a different method\n\n")
 }
 
 # get resources and helper functions
@@ -96,3 +96,25 @@ numinteg.benchm <- microbenchmark(
           )
 numinteg.benchm
 
+# repeat for one method
+# add an alternative function
+f.brob2 <- function(x) brob(log(sin(x)))
+
+simpsonrule.nlb.n <- simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps)
+simpsonrule.nlb.l <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
+simpsonrule.nlb.b <- as.numeric(simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps))
+simpsonrule.nlb.b2 <- as.numeric(simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps))
+
+ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.n, methods=c("real","simpsonrule.nlb - normal"))
+ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.l, methods=c("real","simpsonrule.nlb - log"))
+ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.b, methods=c("real","simpsonrule.nlb - brob"))
+ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.b2, methods=c("real","simpsonrule.nlb - brob2"))
+
+# just compare within one method but with different input
+numinteg.benchm2 <- microbenchmark(
+          simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
+          simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps),
+          simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps),
+          simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps)
+)
+numinteg.benchm2
