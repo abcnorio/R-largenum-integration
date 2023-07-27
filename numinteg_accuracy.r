@@ -61,7 +61,7 @@ trapez.v <- pracma:::trapz(x=sek, y=f(sek))
 Nsteps <- 1e4
 
 # log
-simpson.l.v <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
+simpson.l.v <- exp(simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps))
 
 # brob
 sek <- seq(lower,upper, length=Nsteps+1)
@@ -90,8 +90,8 @@ numinteg.benchm <- microbenchmark(
           integrate(f, lower, upper)$v,
           Rmpfr:::integrateR(f.Rmpfr, lower, upper)$value,
           pracma:::trapz(x=sek, y=f(sek)),
-          simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
-          exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps)),
+          simpsonrule.nlb(f, lower, upper, method="normal", Nsteps=Nsteps),
+          exp(simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps)),
           as.numeric( trapz.brob(x=sek, y=f.sek.brob.c) )
           )
 numinteg.benchm
@@ -101,10 +101,10 @@ Nsteps <- 1e3
 # add an alternative function
 f.brob2 <- function(x) brob(log(sin(x)))
 
-simpsonrule.nlb.n <- simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps)
-simpsonrule.nlb.l <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
-simpsonrule.nlb.b <- as.numeric(simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps))
-simpsonrule.nlb.b2 <- as.numeric(simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps))
+simpsonrule.nlb.n <- simpsonrule.nlb(f, lower, upper, method="normal", Nsteps=Nsteps)
+simpsonrule.nlb.l <- exp(simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps))
+simpsonrule.nlb.b <- as.numeric(simpsonrule.nlb(f.brob, lower, upper, method="brob", Nsteps=Nsteps))
+simpsonrule.nlb.b2 <- as.numeric(simpsonrule.nlb(f.brob2, lower, upper, method="brob", Nsteps=Nsteps))
 
 ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.n, methods=c("real","simpsonrule.nlb - normal"))
 ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.l, methods=c("real","simpsonrule.nlb - log"))
@@ -113,9 +113,9 @@ ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.b2, methods=c("real","simp
 
 # just compare within one method but with different input
 numinteg.benchm2 <- microbenchmark(
-          simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
-          simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps),
-          simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps),
-          simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps)
+          simpsonrule.nlb(f, lower, upper, method="normal", Nsteps=Nsteps),
+          simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps),
+          simpsonrule.nlb(f.brob, lower, upper, method="brob", Nsteps=Nsteps),
+          simpsonrule.nlb(f.brob2, lower, upper, method="brob", Nsteps=Nsteps)
 )
 numinteg.benchm2

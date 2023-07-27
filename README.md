@@ -132,7 +132,7 @@ f.integ <- function(lower,upper) -cos(upper) -(-cos(lower))
 int.real.v <- f.integ(lower=lower, upper=upper)
 # numerical integration using method on log scale
 f.log <- function(x) log(sin(x))
-simpson.l.v <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
+simpson.l.v <- exp(simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps))
 # check accuracy
 ck.accuracy(comp=int.real.v, numinteg=simpson.l.v, methods=c("real value","simpson log"))
 ```
@@ -169,19 +169,19 @@ For benchmarking, the R package [microbenchmark](https://github.com/joshuaulrich
 +           integrate(f, lower, upper)$v,
 +           Rmpfr:::integrateR(f.Rmpfr, lower, upper)$value,
 +           pracma:::trapz(x=sek, y=f(sek)),
-+           simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
-+           exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps)),
++           simpsonrule.nlb(f, lower, upper, method="normal", Nsteps=Nsteps),
++           exp(simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps)),
 +           as.numeric( trapz.brob(x=sek, y=f.sek.brob.c) )
 +           )
 > numinteg.benchm
 Unit: microseconds
-                                                                     expr       min        lq        mean    median        uq      max neval  cld
-                                             integrate(f, lower, upper)$v    17.950    26.165    42.94091    46.615    55.640    71.14   100 a   
-                          Rmpfr:::integrateR(f.Rmpfr, lower, upper)$value 25575.446 26318.942 28044.54153 26948.197 28003.902 39713.58   100  b  
-                                      pracma:::trapz(x = sek, y = f(sek))   421.650   436.935   465.50396   445.700   454.520   829.30   100 a   
-       simpsonrule.nlb(f, lower, upper, type = "normal", Nsteps = Nsteps)    62.140    71.510    90.17502    91.560    98.245   269.67   100 a   
- exp(simpsonrule.nlb(f.log, lower, upper, type = "log", Nsteps = Nsteps))  1403.640  1477.560  1687.81533  1521.095  1572.291 15313.48   100   c 
-                        as.numeric(trapz.brob(x = sek, y = f.sek.brob.c))  7607.822  7882.082  8339.16269  8047.017  8205.902 21620.37   100    d 
+                                                                       expr       min        lq        mean    median        uq      max neval  cld
+                                               integrate(f, lower, upper)$v    17.950    26.165    42.94091    46.615    55.640    71.14   100 a   
+                            Rmpfr:::integrateR(f.Rmpfr, lower, upper)$value 25575.446 26318.942 28044.54153 26948.197 28003.902 39713.58   100  b  
+                                        pracma:::trapz(x = sek, y = f(sek))   421.650   436.935   465.50396   445.700   454.520   829.30   100 a   
+       simpsonrule.nlb(f, lower, upper, method = "normal", Nsteps = Nsteps)    62.140    71.510    90.17502    91.560    98.245   269.67   100 a   
+ exp(simpsonrule.nlb(f.log, lower, upper, method = "log", Nsteps = Nsteps))  1403.640  1477.560  1687.81533  1521.095  1572.291 15313.48   100   c 
+						  as.numeric(trapz.brob(x = sek, y = f.sek.brob.c))  7607.822  7882.082  8339.16269  8047.017  8205.902 21620.37   100    d 
 ```
 
 **Note:**
@@ -195,10 +195,10 @@ Thus, we can repeat the benchmarking above but we will use only one method `simp
 > # add an alternative function
 > f.brob2 <- function(x) brob(log(sin(x)))
 >
-> simpsonrule.nlb.n <- simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps)
-> simpsonrule.nlb.l <- exp(simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps))
-> simpsonrule.nlb.b <- as.numeric(simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps))
-> simpsonrule.nlb.b2 <- as.numeric(simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps))
+> simpsonrule.nlb.n <- simpsonrule.nlb(f, lower, upper, method="normal", Nsteps=Nsteps)
+> simpsonrule.nlb.l <- exp(simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps))
+> simpsonrule.nlb.b <- as.numeric(simpsonrule.nlb(f.brob, lower, upper, method="brob", Nsteps=Nsteps))
+> simpsonrule.nlb.b2 <- as.numeric(simpsonrule.nlb(f.brob2, lower, upper, method="brob", Nsteps=Nsteps))
 >
 > ck.accuracy(comp=int.real.v, numinteg=simpsonrule.nlb.n, methods=c("real","simpsonrule.nlb - normal"))
 
@@ -270,18 +270,18 @@ and then we compare the speed:
 ```
 > # just compare within one method but with different input
 > numinteg.benchm2 <- microbenchmark(
-+           simpsonrule.nlb(f, lower, upper, type="normal", Nsteps=Nsteps),
-+           simpsonrule.nlb(f.log, lower, upper, type="log", Nsteps=Nsteps),
-+           simpsonrule.nlb(f.brob, lower, upper, type="brob", Nsteps=Nsteps),
-+           simpsonrule.nlb(f.brob2, lower, upper, type="brob", Nsteps=Nsteps)
++           simpsonrule.nlb(f, lower, upper, method="normal", Nsteps=Nsteps),
++           simpsonrule.nlb(f.log, lower, upper, method="log", Nsteps=Nsteps),
++           simpsonrule.nlb(f.brob, lower, upper, method="brob", Nsteps=Nsteps),
++           simpsonrule.nlb(f.brob2, lower, upper, method="brob", Nsteps=Nsteps)
 + )
 > numinteg.benchm2
 Unit: microseconds
                                                                    expr       min        lq         mean     median         uq       max neval cld
-     simpsonrule.nlb(f, lower, upper, type = "normal", Nsteps = Nsteps)     61.64     66.79     81.06962     78.810     92.600    112.64   100 a  
-    simpsonrule.nlb(f.log, lower, upper, type = "log", Nsteps = Nsteps)   1398.98   1485.38   1693.13454   1525.745   1609.541  12096.86   100 a  
-  simpsonrule.nlb(f.brob, lower, upper, type = "brob", Nsteps = Nsteps) 231282.95 240144.51 252877.14441 251100.391 258555.633 515170.27   100  b 
- simpsonrule.nlb(f.brob2, lower, upper, type = "brob", Nsteps = Nsteps) 157890.80 167820.18 176322.08066 175793.131 183799.018 211417.95   100   c
+     simpsonrule.nlb(f, lower, upper, method = "normal", Nsteps = Nsteps)     61.64     66.79     81.06962     78.810     92.600    112.64   100 a  
+    simpsonrule.nlb(f.log, lower, upper, method = "log", Nsteps = Nsteps)   1398.98   1485.38   1693.13454   1525.745   1609.541  12096.86   100 a  
+  simpsonrule.nlb(f.brob, lower, upper, method = "brob", Nsteps = Nsteps) 231282.95 240144.51 252877.14441 251100.391 258555.633 515170.27   100  b 
+ simpsonrule.nlb(f.brob2, lower, upper, method = "brob", Nsteps = Nsteps) 157890.80 167820.18 176322.08066 175793.131 183799.018 211417.95   100   c
  ```
 
 **Note:**

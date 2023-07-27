@@ -17,19 +17,19 @@ Nsteps <- 100
 
 # calculate
 cmna:::trap(f, -pi, pi, m=Nsteps)
-trap.tweak(f, lower, upper, Nsteps, type="normal")
+trap.nl(f, lower, upper, Nsteps, method="normal")
 
 log( cmna:::trap(f, -pi, pi, m=Nsteps) )
-trap.tweak(f.log, lower, upper, Nsteps, type="log")
-trap.tweak(f.log2, lower, upper, Nsteps, type="log")
+trap.nl(f.log, lower, upper, Nsteps, method="log")
+trap.nl(f.log2, lower, upper, Nsteps, method="log")
 
 # benchmarking
 mbench.res1 <- microbenchmark( 
   cmna:::trap(f, -pi, pi, m=Nsteps),
   log( cmna:::trap(f, -pi, pi, m=Nsteps) ),
-  trap.tweak(f, lower, upper, Nsteps, type="normal"),
-  trap.tweak(f.log, lower, upper, Nsteps, type="log"),
-  trap.tweak(f.log2, lower, upper, Nsteps, type="log")
+  trap.nl(f, lower, upper, Nsteps, method="normal"),
+  trap.nl(f.log, lower, upper, Nsteps, method="log"),
+  trap.nl(f.log2, lower, upper, Nsteps, method="log")
 )
 
 mbench.res1
@@ -47,21 +47,21 @@ Nsteps <- 3 # m
 
 # calculate
 log(cmna:::romberg(f, lower, upper, m=Nsteps, tab=FALSE))
-log(romberg.tweak(f, lower, upper, Nsteps, tab=FALSE, type="normal"))
-romberg.tweak(f.log, lower, upper, Nsteps, tab=FALSE, type="log")
-romberg.tweak(f.log2, lower, upper, Nsteps, tab=FALSE, type="log")
+log(romberg.nl(f, lower, upper, Nsteps, tab=FALSE, method="normal"))
+romberg.nl(f.log, lower, upper, Nsteps, tab=FALSE, method="log")
+romberg.nl(f.log2, lower, upper, Nsteps, tab=FALSE, method="log")
 
 log(cmna:::romberg(f, lower, upper, m=Nsteps, tab=TRUE))
-log(romberg.tweak(f, lower, upper, Nsteps, tab=TRUE, type="normal"))
-romberg.tweak(f.log, lower, upper, Nsteps, tab=TRUE, type="log")
-romberg.tweak(f.log2, lower, upper, Nsteps, tab=TRUE, type="log")
+log(romberg.nl(f, lower, upper, Nsteps, tab=TRUE, method="normal"))
+romberg.nl(f.log, lower, upper, Nsteps, tab=TRUE, method="log")
+romberg.nl(f.log2, lower, upper, Nsteps, tab=TRUE, method="log")
 
 # benchmarking
 mbench.res2 <- microbenchmark( 
          log( cmna:::romberg(f, lower, upper, m=Nsteps, tab=FALSE) ),
-				 log( romberg.tweak(f, lower, upper, Nsteps, tab=FALSE, type="normal") ),
-				 romberg.tweak( f.log, lower, upper, Nsteps, tab=FALSE, type="log" ),
-				 romberg.tweak( f.log2, lower, upper, Nsteps, tab=FALSE, type="log" )
+				 log( romberg.nl(f, lower, upper, Nsteps, tab=FALSE, method="normal") ),
+				 romberg.nl( f.log, lower, upper, Nsteps, tab=FALSE, method="log" ),
+				 romberg.nl( f.log2, lower, upper, Nsteps, tab=FALSE, method="log" )
 			   )
 
 mbench.res2
