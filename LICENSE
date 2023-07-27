@@ -12,4 +12,5 @@ License: BSD_2_clause + by James P. Howard, II
 
 changes done to enable very large numbers (C) 2023 by LG
 License: GPL in accordance to packages above
-All what is not covered by the statements above: GPL (>= 3)
+
+All changes done to existent R code or new R code: GPL (>= 3) (C) by LG
